@@ -11,7 +11,7 @@ function getComputerChoice() {
 
 
 function getHumanChoice(){
-    let choice = prompt("Choice among:rock,paper or scissors");
+    let choice = prompt("Choice among:rock,paper or scissors").toLowerCase();
     
     if (choice == "rock"){
         return "rock";
@@ -28,6 +28,8 @@ function getHumanChoice(){
     
 
 }
+
+
 
 let humanScore = 0;
 let computerScore = 0;
