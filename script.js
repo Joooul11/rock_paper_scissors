@@ -29,4 +29,66 @@ function getHumanChoice(){
 
 }
 
-console.log(getHumanChoice())
+let humanScore = 0;
+let computerScore = 0;
+
+
+function playRound(humanChoice,computerChoice) {
+ let winner = "";
+ if (humanChoice == "rock" && computerChoice == "paper" ){
+    humanScore -=1;
+    computerScore +=1;
+    return console.log("PC Wins");
+ }
+ else if (humanChoice == "rock" && computerChoice != "rock"){
+    
+ }
+ else if  (humanChoice == "rock" && computerChoice != "scissors" ){
+    humanScore +=1;
+    computerScore-=1;
+    return console.log("Human Wins");
+ }
+
+
+
+ else if (humanChoice == "paper" && computerChoice == "rock" ){
+    humanScore+=1;
+    computerScore-=1;
+    return console.log("Human Wins");
+ }
+ else if (humanChoice == "paper" && computerChoice == "paper" ){
+
+ }
+ else if (humanChoice == "paper" && computerChoice == "scissors"){
+    humanScore-=1;
+    computerScore+=1;
+    return console.log("PC Wins");
+
+ }
+
+
+else if (humanChoice == "scissors" && computerChoice == "rock" ){
+    computerScore+=1;
+    humanScore-=1;
+    return console.log("PC Wins");
+
+}
+
+else if (humanChoice == "scissors" && computerChoice == "paper" ){
+    computerScore-=1;
+    humanScore+=1;
+    return console.log("Human Wins");
+}
+else if (humanChoice == "scissors" && computerChoice == "scissors" ){
+
+}
+
+
+}
+
+
+
+const humanSelection = getHumanChoice().toLowerCase();
+const computerSelection = getComputerChoice();
+
+playRound(humanSelection, computerSelection);
