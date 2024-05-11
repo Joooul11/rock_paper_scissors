@@ -10,6 +10,8 @@ function getComputerChoice() {
 }
 
 
+
+
 function getHumanChoice(){
     let choice = prompt("Choice among:rock,paper or scissors").toLowerCase();
     
@@ -31,66 +33,49 @@ function getHumanChoice(){
 
 
 
-let humanScore = 0;
-let computerScore = 0;
-
-
-function playRound(humanChoice,computerChoice) {
- let winner = "";
- if (humanChoice == "rock" && computerChoice == "paper" ){
-    humanScore -=1;
-    computerScore +=1;
-    return console.log("PC Wins");
- }
- else if (humanChoice == "rock" && computerChoice != "rock"){
-    
- }
- else if  (humanChoice == "rock" && computerChoice != "scissors" ){
-    humanScore +=1;
-    computerScore-=1;
-    return console.log("Human Wins");
- }
 
 
 
- else if (humanChoice == "paper" && computerChoice == "rock" ){
-    humanScore+=1;
-    computerScore-=1;
-    return console.log("Human Wins");
- }
- else if (humanChoice == "paper" && computerChoice == "paper" ){
 
- }
- else if (humanChoice == "paper" && computerChoice == "scissors"){
-    humanScore-=1;
-    computerScore+=1;
-    return console.log("PC Wins");
-
- }
-
-
-else if (humanChoice == "scissors" && computerChoice == "rock" ){
-    computerScore+=1;
-    humanScore-=1;
-    return console.log("PC Wins");
-
-}
-
-else if (humanChoice == "scissors" && computerChoice == "paper" ){
-    computerScore-=1;
-    humanScore+=1;
-    return console.log("Human Wins");
-}
-else if (humanChoice == "scissors" && computerChoice == "scissors" ){
-
-}
-
-
+function playRound(humanChoice, computerChoice) {
+    if ((humanChoice === "rock" && computerChoice === "scissors") ||
+        (humanChoice === "paper" && computerChoice === "rock") ||
+        (humanChoice === "scissors" && computerChoice === "paper")) {
+        return 1;  
+    } else if (humanChoice === computerChoice) {
+        return 0;  
+    } else {
+        return -1; 
+    }
 }
 
 
 
-const humanSelection = getHumanChoice().toLowerCase();
-const computerSelection = getComputerChoice();
 
-playRound(humanSelection, computerSelection);
+function playGame() {
+    let humanScore = 0;
+    let computerScore = 0;
+    for (let i = 0; i < 5; i++) {
+        let humanSelection = getHumanChoice();
+        let computerSelection = getComputerChoice();
+        let result = playRound(humanSelection, computerSelection);
+        if (result === 1) {
+            humanScore++;
+        } else if (result === -1) {
+            computerScore++;
+        }
+        console.log(`Round ${i + 1}: Human chose ${humanSelection}, Computer chose ${computerSelection}`);
+        console.log(`Current Score -> Human: ${humanScore}, Computer: ${computerScore}`);
+    }
+
+    if (humanScore > computerScore) {
+        return "Human Wins";
+    } else if (humanScore == computerScore) {
+        return "Draw";
+    } else {
+        return "Computer Wins";
+    }
+}
+
+console.log(playGame());
+
