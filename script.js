@@ -9,34 +9,6 @@ function getComputerChoice() {
     }
 }
 
-
-
-
-function getHumanChoice(){
-    let choice = prompt("Choice among:rock,paper or scissors").toLowerCase();
-    
-    if (choice == "rock"){
-        return "rock";
-    }
-    else if ( choice == "paper"){
-        return 'paper';
-    }
-    else if (choice == 'scissors'){
-        return 'scissors'
-    }
-    else {
-        return "Enter appropriate value"
-    }
-    
-
-}
-
-
-
-
-
-
-
 function playRound(humanChoice, computerChoice) {
     if ((humanChoice === "rock" && computerChoice === "scissors") ||
         (humanChoice === "paper" && computerChoice === "rock") ||
@@ -49,33 +21,40 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
-
-
-
 function playGame() {
     let humanScore = 0;
     let computerScore = 0;
+    let gameResults = document.getElementById('gameResults');
+    gameResults.innerHTML = '';  
+
     for (let i = 0; i < 5; i++) {
-        let humanSelection = getHumanChoice();
+        let humanSelection = prompt("Choose among: rock, paper, or scissors").toLowerCase();
         let computerSelection = getComputerChoice();
         let result = playRound(humanSelection, computerSelection);
+
         if (result === 1) {
             humanScore++;
-        } else if (result === -1) {
+            gameResults.innerHTML += `Round ${i + 1}: Human chose ${humanSelection}, Computer chose ${computerSelection}. Human wins the round.<br>`;
+        } else if (result === 0) {
+            gameResults.innerHTML += `Round ${i + 1}: Human chose ${humanSelection}, Computer chose ${computerSelection}. It's a tie.<br>`;
+        } else {
             computerScore++;
+            gameResults.innerHTML += `Round ${i + 1}: Human chose ${humanSelection}, Computer chose ${computerSelection}. Computer wins the round.<br>`;
         }
-        console.log(`Round ${i + 1}: Human chose ${humanSelection}, Computer chose ${computerSelection}`);
-        console.log(`Current Score -> Human: ${humanScore}, Computer: ${computerScore}`);
     }
 
     if (humanScore > computerScore) {
-        return "Human Wins";
+        gameResults.innerHTML += "<strong>Game Over: Human Wins!</strong>";
     } else if (humanScore == computerScore) {
-        return "Draw";
+        gameResults.innerHTML += "<strong>Game Over: It's a Draw.</strong>";
     } else {
-        return "Computer Wins";
+        gameResults.innerHTML += "<strong>Game Over: Computer Wins!</strong>";
     }
 }
 
-console.log(playGame());
+document.getElementById('playGameButton').addEventListener('click', playGame);
+
+
+
+
 
